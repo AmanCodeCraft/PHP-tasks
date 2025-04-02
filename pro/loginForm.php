@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +30,8 @@
             color: #333;
         }
 
-        input, button {
+        input,
+        button {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
@@ -45,7 +42,7 @@
         }
 
         button {
-            background:rgb(59, 113, 200);
+            background: rgb(59, 113, 200);
             border: none;
             color: white;
             font-size: 18px;
@@ -56,6 +53,10 @@
         button:hover {
             background: #90caf9;
         }
+        a{
+            color: white;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -63,11 +64,45 @@
     <div class="container">
         <form action="loginForm.php" method="post">
             <h2>Login Form</h2>
-            <input type="text" name="name" placeholder="Enter your name" required>
+            <input type="email" name="mail" placeholder="Enter your mail id" required>
             <input type="password" name="pass" placeholder="Enter your password" required>
             <button type="submit" name="submit">Login</button>
+            <button><a href="./createProfile.php" >Create New Profile</a></button>
         </form>
     </div>
 </body>
 
 </html>
+
+<?php
+
+require 'connection.php';
+
+if (isset($_POST['submit'])) {
+    $id = $_POST['mail'];
+    $pass = $_POST['pass'];
+
+    $sql = "SELECT id,mail_id,pass FROM ashu WHERE mail_id='$id' AND pass='$pass'";
+
+    $result = mysqli_query($conn, $sql);
+
+    $row = mysqli_num_rows($result);
+
+    $result1 = mysqli_fetch_assoc($result);
+
+    if ($row > 0) {
+        session_start();  //session start
+        $_SESSION['id'] =$result1['id'];
+        $_SESSION['user_pass'] =$result1['pass'];
+        header('Location:showData.php');
+
+    } else {
+        ?>
+        <script>
+            alert("Not Found");
+        </script>
+        <?php
+       
+    }
+}
+?>
