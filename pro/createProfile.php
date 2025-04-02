@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,17 +52,22 @@
         button:hover {
             background: #90caf9;
         }
+        a{
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <form action="connection.php" method="post">
+        <form action="insert.php" method="post">
             <h1>Create Your Account</h1>
             <input type="text" name="name" placeholder="Enter name" required>
             <input type="email" name="mail" placeholder="Enter email" required>
             <input type="password" name="pass" placeholder="Enter password" required>
-            <button type="submit" name="submit">Submit</button>
+            <button type="submit" name="submit">Create New Profile</button>
+            <button><a href="./loginForm.php" >Login ID</a></button>
         </form>
     </div>
 </body>
